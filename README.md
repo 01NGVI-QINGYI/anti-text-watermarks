@@ -314,6 +314,9 @@ python -m anti_text_watermarks web --port 8765
 ```
 
 Open `http://127.0.0.1:8765` in your browser to access two interactive consoles:
+
+The built-in server only binds to a loopback IPv4 address. For remote access, keep it bound to `127.0.0.1` and place an authenticated HTTPS reverse proxy in front of it. Start the server with `--trusted-origin https://studio.example.com` and configure the proxy to preserve the `Host` header. Direct non-loopback HTTP binding is rejected. Local Ollama and `api.openai.com` are allowed as LLM endpoints; add `--llm-allowed-origin https://your-llm.example` for another trusted OpenAI-compatible service.
+
 - **⚡ Adversarial De-Watermarking Studio**: Real-time gauges for estimated `textGrain` detection survival, trajectory pivotal $Z$-score, 3/4/5-gram hash disruption ratios, interactive **Sliding $n$-gram Cascade Heatmap** (highlighting direct pivot edits vs. cascade-invalidated context tokens), **Token-level Diff Viewer**, and **Perturbation Audit Log**.
 - **🎯 Live-Fire textGrain Attack Sandbox**: Configure custom secret keys, embed genuine Gumbel optimal-transport + zero-width watermarks into any text, and watch the detector's Gumbel $Z$-score, Green-list fraction, and $p$-value collapse in real time.
 

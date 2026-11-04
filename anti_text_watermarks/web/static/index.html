@@ -96,7 +96,7 @@
             </div>
           </div>
 
-          <textarea id="input-text" class="editor-textarea" placeholder="在此粘贴包含 textGrain / SynthID / Claude 统计水印或零宽隐写水印的文本...（支持 Markdown、代码块与数学公式自动锁定保护）"></textarea>
+          <textarea id="input-text" class="editor-textarea" maxlength="20000" placeholder="在此粘贴包含 textGrain / SynthID / Claude 统计水印或零宽隐写水印的文本...（最多 20,000 字符，支持 Markdown、代码块与数学公式自动锁定保护）"></textarea>
 
           <div class="controls-section">
             <div class="control-row">
@@ -161,7 +161,7 @@
                 </div>
                 <div class="api-inputs-grid">
                   <div>
-                    <label>API Base URL (Ollama 或 OpenAI 兼容)</label>
+                    <label>API Base URL (远程端点需 HTTPS 且列入允许列表)</label>
                     <input type="text" id="input-llm-url" value="http://localhost:11434/v1" class="text-input" />
                   </div>
                   <div>

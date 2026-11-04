@@ -22,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputLlmModel = document.getElementById("input-llm-model");
   const inputLlmKey = document.getElementById("input-llm-key");
 
+  function showRequestError(message) {
+    const warnBanner = document.getElementById("warnings-banner");
+    warnBanner.textContent = "请求失败: " + message;
+    warnBanner.classList.remove("hidden");
+  }
+
   // Mode Tabs
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -167,9 +173,11 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(payload),
       });
       const result = await res.json();
+      if (!res.ok || result.error) throw new Error(result.error || `HTTP ${res.status}`);
       renderPipelineResult(result);
     } catch (err) {
       console.error(err);
+      showRequestError(err.message || "无法连接到 Web Studio");
     } finally {
       btn.disabled = false;
       btn.textContent = origBtnText;
@@ -299,6 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }),
       });
       const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || `HTTP ${res.status}`);
       const b = data.detection_before || {};
       const a = data.detection_after || {};
 
@@ -317,6 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("sb-text-after").textContent = data.attacked_text || "";
     } catch (e) {
       console.error(e);
+      showRequestError(e.message || "无法连接到 Web Studio");
     } finally {
       btn.disabled = false;
       btn.textContent = origLabel;

@@ -12,11 +12,22 @@ DeepSeek, Qwen, or OpenAI API with watermark opt-out).
 from __future__ import annotations
 
 import json
-import urllib.error
+import time
 import urllib.request
 from typing import Optional, Tuple
 
 from .models import PipelineConfig
+
+MAX_CHAT_COMPLETION_RESPONSE_BYTES = 1024 * 1024
+CHAT_RESPONSE_READ_CHUNK_BYTES = 64 * 1024
+
+
+class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+_NO_REDIRECT_OPENER = urllib.request.build_opener(_NoRedirectHandler)
 
 
 class DipperParaphraseEngine:
@@ -113,9 +124,38 @@ class DipperParaphraseEngine:
             headers=headers,
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            body = json.loads(resp.read().decode("utf-8"))
+        deadline = time.monotonic() + timeout
+        with _NO_REDIRECT_OPENER.open(req, timeout=timeout) as resp:
+            body = json.loads(cls._read_bounded_response(resp, deadline).decode("utf-8"))
             choices = body.get("choices") or []
             if choices:
                 return choices[0].get("message", {}).get("content", "")
             return ""
+
+    @staticmethod
+    def _read_bounded_response(resp, deadline: float) -> bytes:
+        content_length = resp.headers.get("Content-Length")
+        if content_length is not None:
+            try:
+                declared_length = int(content_length)
+                if declared_length < 0 or declared_length > MAX_CHAT_COMPLETION_RESPONSE_BYTES:
+                    raise ValueError("LLM response exceeds the configured size limit")
+            except ValueError as exc:
+                raise ValueError("LLM response has an invalid or oversized Content-Length") from exc
+
+        response_socket = getattr(getattr(getattr(resp, "fp", None), "raw", None), "_sock", None)
+        if response_socket is None:
+            raise ValueError("LLM response does not expose a socket for bounded reads")
+        read_chunk = getattr(resp, "read1", resp.read)
+        body = bytearray()
+        while True:
+            remaining_time = deadline - time.monotonic()
+            if remaining_time <= 0:
+                raise TimeoutError("LLM response exceeded the total read time limit")
+            response_socket.settimeout(remaining_time)
+            chunk = read_chunk(min(CHAT_RESPONSE_READ_CHUNK_BYTES, MAX_CHAT_COMPLETION_RESPONSE_BYTES + 1 - len(body)))
+            if not chunk:
+                return bytes(body)
+            body.extend(chunk)
+            if len(body) > MAX_CHAT_COMPLETION_RESPONSE_BYTES:
+                raise ValueError("LLM response exceeds the configured size limit")

@@ -284,6 +284,9 @@ python -m anti_text_watermarks web --port 8765
 ```
 
 ブラウザで `http://127.0.0.1:8765` を開くと、2つの専用ワークスペースを利用できます。
+
+組み込みサーバーは IPv4 ループバックアドレスにのみバインドします。リモートアクセスでは `127.0.0.1` にバインドしたまま、認証付き HTTPS リバースプロキシを前段に配置してください。起動時に `--trusted-origin https://studio.example.com` を指定し、プロキシが `Host` ヘッダーを保持するよう設定します。非ループバックへの HTTP 直接バインドは拒否されます。LLM 接続先はローカル Ollama と `api.openai.com` が既定で許可されます。ほかの信頼できる OpenAI 互換サービスは `--llm-allowed-origin https://your-llm.example` で追加できます。
+
 - **⚡ 対抗的透かし除去スタジオ（Adversarial De-Watermarking Studio）**：推定 `textGrain` 検出生存率、ピボット統計量 $Z$-score、3/4/5-gram ハッシュ破壊率のリアルタイムゲージに加え、**n-gram ハッシュ連鎖無効化ヒートマップ**（直接置換されたピボット語をアンバー色、連鎖的にハッシュが無効化された後続トークンをシアン破線で可視化）、**単語単位 Diff ビュー**、**監査ログ**を表示します。
 - **🎯 textGrain 実弾演習場（Live-Fire Attack Sandbox）**：任意の秘密鍵（Secret Key）を設定し、本物の Gumbel 最適輸送透かし＋ゼロ幅文字をテキストに注入した上で、除去前後の $Z$-score と片側 $p$-value の崩壊をリアルタイムに検証できます。
 

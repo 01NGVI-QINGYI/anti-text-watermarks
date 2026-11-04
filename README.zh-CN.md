@@ -317,6 +317,9 @@ python -m anti_text_watermarks web --port 8765
 ```
 
 浏览器打开 `http://127.0.0.1:8765`，包含两大交互式工作区：
+
+内置服务只允许绑定本机 IPv4 回环地址。需要远程访问时，请保持绑定到 `127.0.0.1`，并在前面配置带认证的 HTTPS 反向代理。启动时设置 `--trusted-origin https://studio.example.com`，并让代理保留 `Host` 请求头；直接绑定到非本机地址会被拒绝。默认允许本地 Ollama 和 `api.openai.com`；其他可信的 OpenAI 兼容服务可通过 `--llm-allowed-origin https://your-llm.example` 加入允许列表。
+
 - **⚡ 对抗去水印工作台**：实时仪表盘展示**预估 textGrain 检出率衰减**、**轨迹枢轴统计量 $Z$-Score 与 $p$-value**、**3/4/5-gram 滑动窗口破坏率**，并提供**逐词 $n$-gram 哈希失效热力图**（橙色高亮直接替换的高熵枢轴词，青色虚线标注级联失效的上下文词）、**逐词 Diff 对比**与**扰动审计日志**。
 - **🎯 textGrain 实弹攻防靶场**：支持自定义模拟密钥（Secret Key），一键向任意文本注入真实的 Gumbel 最优传输统计水印与零宽隐写，直观对比对抗前后的综合 $Z$-Score、Gumbel $Z$-Score、绿表命中率与单侧 $p$-value。
 

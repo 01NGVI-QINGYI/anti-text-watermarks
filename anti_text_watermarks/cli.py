@@ -199,8 +199,26 @@ def build_parser() -> argparse.ArgumentParser:
 
     # Subcommand: web
     web_p = subparsers.add_parser("web", help="Launch the interactive anti-text-watermarks Web Studio")
-    web_p.add_argument("--host", type=str, default="127.0.0.1", help="Host address (default: 127.0.0.1)")
+    web_p.add_argument(
+        "--host",
+        type=str,
+        default="127.0.0.1",
+        help="Loopback IPv4 address only (default: 127.0.0.1); use an authenticated HTTPS reverse proxy for remote access",
+    )
     web_p.add_argument("--port", type=int, default=8765, help="Port number (default: 8765)")
+    web_p.add_argument(
+        "--trusted-origin",
+        type=str,
+        default=None,
+        help="HTTPS origin forwarded by an authenticated reverse proxy",
+    )
+    web_p.add_argument(
+        "--llm-allowed-origin",
+        action="append",
+        default=None,
+        metavar="ORIGIN",
+        help="Additional LLM endpoint origin allowed by Web Studio (repeatable)",
+    )
     web_p.add_argument("--no-browser", action="store_true", help="Do not auto-open browser")
 
     # Also allow top-level flags directly for convenience
@@ -241,7 +259,13 @@ def main(argv: Optional[List[str]] = None) -> int:
     if args.command == "web":
         from .web.server import run_web_server
 
-        run_web_server(host=args.host, port=args.port, open_browser=not args.no_browser)
+        run_web_server(
+            host=args.host,
+            port=args.port,
+            open_browser=not args.no_browser,
+            trusted_origin=args.trusted_origin,
+            allowed_llm_origins=args.llm_allowed_origin,
+        )
         return 0
 
     if args.command == "benchmark":

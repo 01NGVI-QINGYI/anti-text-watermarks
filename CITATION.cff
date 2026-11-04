@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use, modify, or build upon anti-text-watermarks, please cite the original author as below."
+title: "anti-text-watermarks: Adversarial Entropy-Calibrated De-Watermarking and Provenance Sanitization Engine"
+version: 1.0.0
+date-released: 2026-11-05
+license: AGPL-3.0-or-later
+repository-code: "https://github.com/01NGVI-QINGYI/anti-text-watermarks"
+url: "https://github.com/01NGVI-QINGYI/anti-text-watermarks"
+authors:
+  - alias: "01NGVI-QINGYI"
+    name: "01NGVI-QINGYI"
+keywords:
+  - watermark
+  - textGrain
+  - SynthID
+  - DIPPER
+  - MarkLLM
+  - LLM
+  - adversarial-nlp

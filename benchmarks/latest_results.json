@@ -1,0 +1,388 @@
+{
+  "summary": [
+    {
+      "method_name": "0. Watermarked Baseline (未处理原件)",
+      "category": "Baseline",
+      "avg_combined_z": 4.673,
+      "avg_gumbel_z": 4.933,
+      "avg_green_fraction": 0.9537,
+      "avg_p_value": 0.0001,
+      "avg_ngram4_broken": 0.0,
+      "avg_textgrain_survival": 0.7415,
+      "avg_edit_rate": 0.0,
+      "hidden_unicode_remaining": 48,
+      "code_math_url_integrity": 1.0,
+      "watermark_bypass_rate": 0.0
+    },
+    {
+      "method_name": "1. Pure Unicode Cleaner (仅清除隐形字符/元数据)",
+      "category": "Single-Tool",
+      "avg_combined_z": 4.673,
+      "avg_gumbel_z": 4.933,
+      "avg_green_fraction": 0.9537,
+      "avg_p_value": 0.0001,
+      "avg_ngram4_broken": 0.0,
+      "avg_textgrain_survival": 0.7415,
+      "avg_edit_rate": 0.0,
+      "hidden_unicode_remaining": 0,
+      "code_math_url_integrity": 1.0,
+      "watermark_bypass_rate": 0.0
+    },
+    {
+      "method_name": "2. watermarks-remover (隐形字符 + AI套话标点清洗)",
+      "category": "Single-Tool",
+      "avg_combined_z": 4.126,
+      "avg_gumbel_z": 4.436,
+      "avg_green_fraction": 0.875,
+      "avg_p_value": 0.00429,
+      "avg_ngram4_broken": 0.0952,
+      "avg_textgrain_survival": 0.6192,
+      "avg_edit_rate": 0.0521,
+      "hidden_unicode_remaining": 0,
+      "code_math_url_integrity": 1.0,
+      "watermark_bypass_rate": 0.0
+    },
+    {
+      "method_name": "3. Pure Syntactic Reorder (仅句式翻转/无词汇调度)",
+      "category": "Single-Tool",
+      "avg_combined_z": 3.983,
+      "avg_gumbel_z": 4.115,
+      "avg_green_fraction": 0.9156,
+      "avg_p_value": 0.0001,
+      "avg_ngram4_broken": 0.0746,
+      "avg_textgrain_survival": 0.6563,
+      "avg_edit_rate": 0.0292,
+      "hidden_unicode_remaining": 0,
+      "code_math_url_integrity": 1.0,
+      "watermark_bypass_rate": 0.0
+    },
+    {
+      "method_name": "4. Naive Random Synonym (MarkLLM 随机同义词替换)",
+      "category": "Single-Tool",
+      "avg_combined_z": 1.252,
+      "avg_gumbel_z": 1.322,
+      "avg_green_fraction": 0.6225,
+      "avg_p_value": 0.10547,
+      "avg_ngram4_broken": 0.3036,
+      "avg_textgrain_survival": 0.4421,
+      "avg_edit_rate": 0.1069,
+      "hidden_unicode_remaining": 2,
+      "code_math_url_integrity": 0.7778,
+      "watermark_bypass_rate": 1.0
+    },
+    {
+      "method_name": "5. anti-text-watermarks [Stealth 轻度隐蔽模式]",
+      "category": "Ours (Fused)",
+      "avg_combined_z": 0.699,
+      "avg_gumbel_z": 0.641,
+      "avg_green_fraction": 0.5932,
+      "avg_p_value": 0.26589,
+      "avg_ngram4_broken": 0.3937,
+      "avg_textgrain_survival": 0.3777,
+      "avg_edit_rate": 0.1285,
+      "hidden_unicode_remaining": 0,
+      "code_math_url_integrity": 1.0,
+      "watermark_bypass_rate": 1.0
+    },
+    {
+      "method_name": "6. anti-text-watermarks [Balanced 均衡级联模式 ⭐]",
+      "category": "Ours (Fused)",
+      "avg_combined_z": -0.456,
+      "avg_gumbel_z": -0.501,
+      "avg_green_fraction": 0.4832,
+      "avg_p_value": 0.63917,
+      "avg_ngram4_broken": 0.6388,
+      "avg_textgrain_survival": 0.2074,
+      "avg_edit_rate": 0.2584,
+      "hidden_unicode_remaining": 0,
+      "code_math_url_integrity": 1.0,
+      "watermark_bypass_rate": 1.0
+    },
+    {
+      "method_name": "7. anti-text-watermarks [Aggressive 深度全开模式 🔥]",
+      "category": "Ours (Fused)",
+      "avg_combined_z": -0.384,
+      "avg_gumbel_z": -0.483,
+      "avg_green_fraction": 0.5054,
+      "avg_p_value": 0.62329,
+      "avg_ngram4_broken": 0.655,
+      "avg_textgrain_survival": 0.1856,
+      "avg_edit_rate": 0.2912,
+      "hidden_unicode_remaining": 0,
+      "code_math_url_integrity": 1.0,
+      "watermark_bypass_rate": 1.0
+    }
+  ],
+  "per_doc": {
+    "doc_zh_policy": [
+      {
+        "method": "0. Watermarked Baseline (未处理原件)",
+        "combined_z": 6.183,
+        "p_value": 0.0,
+        "green_fraction": 1.0,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 11,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "值得注​意的是，在当今数字化时代，大规模语言模型产生的内容​扮演着尤为核心的角色。不过，考虑到模型在带来文本时​会通过最优传输算法注入轻微的统计偏移，由此可见探知​器可以采用密钥识别这些暗藏的属性。不仅这种运作方式​能够留存表面语句的流畅，而且它还可以在复杂的长文本​中维持稳固的检出成果。如果我们需要保护隐私并抹除这​..."
+      },
+      {
+        "method": "1. Pure Unicode Cleaner (仅清除隐形字符/元数据)",
+        "combined_z": 6.183,
+        "p_value": 0.0,
+        "green_fraction": 1.0,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "值得注意的是，在当今数字化时代，大规模语言模型产生的内容扮演着尤为核心的角色。不过，考虑到模型在带来文本时会通过最优传输算法注入轻微的统计偏移，由此可见探知器可以采用密钥识别这些暗藏的属性。不仅这种运作方式能够留存表面语句的流畅，而且它还可以在复杂的长文本中维持稳固的检出成果。如果我们需要保护隐私并抹除这种统计关联，那..."
+      },
+      {
+        "method": "2. watermarks-remover (隐形字符 + AI套话标点清洗)",
+        "combined_z": 6.183,
+        "p_value": 0.0,
+        "green_fraction": 1.0,
+        "ngram4_broken": 0.0522,
+        "edit_rate": 0.0435,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "需要指出的是，在当下的技术环境中，大规模语言模型产生的内容扮演着尤为核心的角色。不过，考虑到模型在带来文本时会通过最优传输算法注入轻微的统计偏移，由此可见探知器可以采用密钥识别这些暗藏的属性。不仅这种运作方式能够留存表面语句的流畅，而且它还可以在复杂的长文本中维持稳固的检出成果。如果我们需要保护隐私并抹除这种统计关联，..."
+      },
+      {
+        "method": "3. Pure Syntactic Reorder (仅句式翻转/无词汇调度)",
+        "combined_z": 4.114,
+        "p_value": 1.9e-05,
+        "green_fraction": 0.8857,
+        "ngram4_broken": 0.2239,
+        "edit_rate": 0.0876,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "值得注意的是，在当今数字化时代，大规模语言模型产生的内容扮演着尤为核心的角色。不过，考虑到模型在带来文本时会通过最优传输算法注入轻微的统计偏移，由此可见探知器可以采用密钥识别这些暗藏的属性。除这种运作方式能够留存表面语句的流畅之外，还它还可以在复杂的长文本中维持稳固的检出成果。倘若我们需要保护隐私并抹除这种统计关联，便..."
+      },
+      {
+        "method": "4. Naive Random Synonym (MarkLLM 随机同义词替换)",
+        "combined_z": 1.246,
+        "p_value": 0.106382,
+        "green_fraction": 0.6,
+        "ngram4_broken": 0.3284,
+        "edit_rate": 0.0949,
+        "hidden_remaining": 0,
+        "verdict": "WEAK_RESIDUAL_SIGNAL (Below Threshold)",
+        "output_preview": "值得注意的是，在当今数字化时代，大规模语言模型产生的内容扮演着极为关键的角色。只是，考虑到模型在带来文本时会通过最优传输算法带入微弱的统计偏移，因此探知器可以采用密钥识别这些暗藏的属性。不仅这种机制能够留存表面语句的流畅，而且它还可以在棘手的长文本中保持平稳的检出成效。如果我们需要维护隐私并抹除这种统计关联，那么就务必..."
+      },
+      {
+        "method": "5. anti-text-watermarks [Stealth 轻度隐蔽模式]",
+        "combined_z": 0.943,
+        "p_value": 0.17284,
+        "green_fraction": 0.5714,
+        "ngram4_broken": 0.5299,
+        "edit_rate": 0.1594,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "需要指出的是，在当下的技术环境中，大规模语言模型引发的内容扮演着尤为核心的角色。话虽如此，考虑到模型在给予文本时会通过最优传输算法加入轻微的统计偏移，正因如此探知器可以采用密钥察觉这些暗藏的属性。不仅这种机制能够留存表面语句的流畅，而且它还可以在棘手的长文本中维持可靠的检出成果。如果我们需要守护隐私并抹除这种统计关联，..."
+      },
+      {
+        "method": "6. anti-text-watermarks [Balanced 均衡级联模式 ⭐]",
+        "combined_z": -1.331,
+        "p_value": 0.908405,
+        "green_fraction": 0.3889,
+        "ngram4_broken": 0.8284,
+        "edit_rate": 0.3431,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "需要指出的是，在当下的技术环境中，大规模语言模型引发的内容扮演着至关重要的角色。不过，由于模型在给予文本时会借助最优传输算法加入微小的统计偏移，正因如此探知器可以利用密钥识别这些隐含的特点。除这种机制能够维系表面语句的流畅之外，还它还可以在棘手的长文本中留存稳固的检出结局。倘若我们需要守护隐私并消解这种统计关联，便应当..."
+      },
+      {
+        "method": "7. anti-text-watermarks [Aggressive 深度全开模式 🔥]",
+        "combined_z": -1.185,
+        "p_value": 0.881991,
+        "green_fraction": 0.3889,
+        "ngram4_broken": 0.8284,
+        "edit_rate": 0.3942,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "需要指出的是，在当下的技术环境中，大规模语言模型引发的内容扮演着至关重要的角色。话虽如此，由于模型在生成文本时会依靠最优传输算法带入微小的统计偏移，所以检测器可以利用密钥测定这些隐含的特点。除这种机理能够维系表面语句的流畅之外，还它还可以在棘手的长文本中留存平稳的检出结局。倘若我们需要保障隐私并消解这种统计关联，便应当..."
+      }
+    ],
+    "doc_en_academic": [
+      {
+        "method": "0. Watermarked Baseline (未处理原件)",
+        "combined_z": 3.45,
+        "p_value": 0.00028,
+        "green_fraction": 0.9167,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 28,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "It is essential to​ note that stаtisticаl wa​termarks like textGrain d​elve into high-entropy vo​cabulary blocks during au​toregressive generation. ​Furthermore..."
+      },
+      {
+        "method": "1. Pure Unicode Cleaner (仅清除隐形字符/元数据)",
+        "combined_z": 3.45,
+        "p_value": 0.00028,
+        "green_fraction": 0.9167,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "It is essential to note that statistical watermarks like textGrain delve into high-entropy vocabulary blocks during autoregressive generation. Furthermore, beca..."
+      },
+      {
+        "method": "2. watermarks-remover (隐形字符 + AI套话标点清洗)",
+        "combined_z": 2.231,
+        "p_value": 0.012841,
+        "green_fraction": 0.75,
+        "ngram4_broken": 0.0891,
+        "edit_rate": 0.0288,
+        "hidden_remaining": 0,
+        "verdict": "MODERATE_WATERMARK_SIGNAL",
+        "output_preview": "It is essential to note that statistical watermarks like textGrain examine high-entropy vocabulary blocks during autoregressive generation. In addition, because..."
+      },
+      {
+        "method": "3. Pure Syntactic Reorder (仅句式翻转/无词汇调度)",
+        "combined_z": 3.45,
+        "p_value": 0.00028,
+        "green_fraction": 0.9167,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "It is essential to note that statistical watermarks like textGrain delve into high-entropy vocabulary blocks during autoregressive generation. Furthermore, beca..."
+      },
+      {
+        "method": "4. Naive Random Synonym (MarkLLM 随机同义词替换)",
+        "combined_z": 1.199,
+        "p_value": 0.115264,
+        "green_fraction": 0.5833,
+        "ngram4_broken": 0.1881,
+        "edit_rate": 0.0577,
+        "hidden_remaining": 2,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "It is essential to note that stаtisticаl watermarks like textGrain delve into high-entropy vocabulary blocks during autoregressive generation. Besides, since th..."
+      },
+      {
+        "method": "5. anti-text-watermarks [Stealth 轻度隐蔽模式]",
+        "combined_z": -0.004,
+        "p_value": 0.501596,
+        "green_fraction": 0.5833,
+        "ngram4_broken": 0.2376,
+        "edit_rate": 0.0673,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "It is important to note that statistical watermarks like textGrain evaluate high-entropy vocabulary blocks during autoregressive generation. In addition, becaus..."
+      },
+      {
+        "method": "6. anti-text-watermarks [Balanced 均衡级联模式 ⭐]",
+        "combined_z": 0.963,
+        "p_value": 0.167774,
+        "green_fraction": 0.7273,
+        "ngram4_broken": 0.3861,
+        "edit_rate": 0.1238,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "It is important to note that statistical watermarks like textGrain evaluate high-entropy vocabulary blocks during autoregressive generation. In addition, given ..."
+      },
+      {
+        "method": "7. anti-text-watermarks [Aggressive 深度全开模式 🔥]",
+        "combined_z": 0.424,
+        "p_value": 0.335783,
+        "green_fraction": 0.7273,
+        "ngram4_broken": 0.4059,
+        "edit_rate": 0.1429,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "It is important to note that statistical watermarks like textGrain evaluate high-entropy vocabulary blocks during autoregressive generation. In addition, given ..."
+      }
+    ],
+    "doc_mixed_tech": [
+      {
+        "method": "0. Watermarked Baseline (未处理原件)",
+        "combined_z": 4.386,
+        "p_value": 6e-06,
+        "green_fraction": 0.9444,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 9,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "总而言之​，在审视统计水印的脆弱性时，我们大多时候需要与此同​时考量词汇替换率与窗口级联效应。举例来说，当识别器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，接连的未修改词块会连续累积显著的偏移信号。\n```python\ndef verify_score(z: float) -> bool:\n ..."
+      },
+      {
+        "method": "1. Pure Unicode Cleaner (仅清除隐形字符/元数据)",
+        "combined_z": 4.386,
+        "p_value": 6e-06,
+        "green_fraction": 0.9444,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "总而言之，在审视统计水印的脆弱性时，我们大多时候需要与此同时考量词汇替换率与窗口级联效应。举例来说，当识别器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，接连的未修改词块会连续累积显著的偏移信号。\n```python\ndef verify_score(z: float) -> bool:\n   ..."
+      },
+      {
+        "method": "2. watermarks-remover (隐形字符 + AI套话标点清洗)",
+        "combined_z": 3.963,
+        "p_value": 3.7e-05,
+        "green_fraction": 0.875,
+        "ngram4_broken": 0.1442,
+        "edit_rate": 0.0841,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "归根结底，在审视统计水印的脆弱性时，我们大多时候需要同一时间考量词汇替换率与窗口级联效应。举例来说，当识别器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，接连的未修改词块会连续累积显著的偏移信号。\n```python\ndef verify_score(z: float) -> bool:\n   ..."
+      },
+      {
+        "method": "3. Pure Syntactic Reorder (仅句式翻转/无词汇调度)",
+        "combined_z": 4.386,
+        "p_value": 6e-06,
+        "green_fraction": 0.9444,
+        "ngram4_broken": 0.0,
+        "edit_rate": 0.0,
+        "hidden_remaining": 0,
+        "verdict": "HIGH_CONFIDENCE_WATERMARK (textGrain Signal Detected)",
+        "output_preview": "总而言之，在审视统计水印的脆弱性时，我们大多时候需要与此同时考量词汇替换率与窗口级联效应。举例来说，当识别器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，接连的未修改词块会连续累积显著的偏移信号。\n```python\ndef verify_score(z: float) -> bool:\n   ..."
+      },
+      {
+        "method": "4. Naive Random Synonym (MarkLLM 随机同义词替换)",
+        "combined_z": 1.312,
+        "p_value": 0.09476,
+        "green_fraction": 0.6842,
+        "ngram4_broken": 0.3942,
+        "edit_rate": 0.1682,
+        "hidden_remaining": 0,
+        "verdict": "WEAK_RESIDUAL_SIGNAL (Below Threshold)",
+        "output_preview": "总而言之，在审视统计水印的易损性时，我们通常需要与此同时考量词汇替换率与窗口级联效应。举例来说，当探知器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，持续的未修改词块会接连累积显著的偏移信号。\n```python\ndef assess_score(z: float) -> bool:\n    r..."
+      },
+      {
+        "method": "5. anti-text-watermarks [Stealth 轻度隐蔽模式]",
+        "combined_z": 1.159,
+        "p_value": 0.123228,
+        "green_fraction": 0.625,
+        "ngram4_broken": 0.4135,
+        "edit_rate": 0.1589,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "归根结底，在测算统计水印的脆弱性时，我们一般而言需要同一时间考量词汇替换率与窗口级联效应。比如，当识别器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，不断的未修改词块会不断累积显著的偏移信号。\n```python\ndef verify_score(z: float) -> bool:\n    r..."
+      },
+      {
+        "method": "6. anti-text-watermarks [Balanced 均衡级联模式 ⭐]",
+        "combined_z": -1.0,
+        "p_value": 0.841345,
+        "green_fraction": 0.3333,
+        "ngram4_broken": 0.7019,
+        "edit_rate": 0.3084,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "归根结底，在测算统计水印的易损性时，我们一般而言需要同一时间考量词汇替换率同窗口级联效应。譬如，当识别器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，持续的未修改词块会不断累积大幅的偏移信号。\n```python\ndef verify_score(z: float) -> bool:\n    r..."
+      },
+      {
+        "method": "7. anti-text-watermarks [Aggressive 深度全开模式 🔥]",
+        "combined_z": -0.391,
+        "p_value": 0.652101,
+        "green_fraction": 0.4,
+        "ngram4_broken": 0.7308,
+        "edit_rate": 0.3364,
+        "hidden_remaining": 0,
+        "verdict": "CLEAN / UNWATERMARKED (Human-Indistinguishable)",
+        "output_preview": "归根结底，在测算统计水印的易损性时，我们一般而言需要同一时间考量词汇替换率同窗口级联效应。譬如，当检测器计算枢轴统计量 $Z = (S - N) / \\sqrt{N}$ 时，不断的未修改词块会不断累积大幅的偏移信号。\n```python\ndef verify_score(z: float) -> bool:\n    r..."
+      }
+    ]
+  }
+}

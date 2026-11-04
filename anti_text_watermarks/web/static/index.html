@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>anti-text-watermarks — 统计与隐写文本水印综合对抗系统</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-badge">ATW</div>
+      <div>
+        <h1>anti-text-watermarks <span class="version-pill">v1.0</span></h1>
+        <p class="subtitle">融合 Unicode 隐写清洗 · 高熵枢轴级联破坏 · DIPPER 受控重述 · 多跳回译 · MarkLLM 统计检测靶场</p>
+      </div>
+    </div>
+    <div class="mode-tabs">
+      <button class="tab-btn active" data-tab="studio">⚡ 对抗去水印工作台</button>
+      <button class="tab-btn" data-tab="sandbox">🎯 textGrain 实弹攻防靶场</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- TAB 1: DE-WATERMARKING STUDIO -->
+    <section id="tab-studio" class="tab-panel active">
+      <!-- Forensics Metrics Strip -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">预估 textGrain 检出率</span>
+            <span class="metric-tag" id="tag-survival">等待分析</span>
+          </div>
+          <div class="metric-values">
+            <span class="val-before" id="m-tg-before">92.0%</span>
+            <span class="arrow">→</span>
+            <span class="val-after" id="m-tg-after">--</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="bar-tg-after" style="width: 0%"></div>
+          </div>
+          <div class="metric-foot">基于 OpenAI 官方技术报告衰减曲线校准</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">轨迹枢轴统计量 (Z-Score)</span>
+            <span class="metric-tag" id="tag-zscore">阈值 Z=1.65</span>
+          </div>
+          <div class="metric-values">
+            <span class="val-before" id="m-z-before">--</span>
+            <span class="arrow">→</span>
+            <span class="val-after" id="m-z-after">--</span>
+          </div>
+          <div class="metric-foot" id="m-pvalue-foot">单侧检验 p-value: --</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">4-Gram 滑动窗口哈希破坏率</span>
+            <span class="metric-tag tag-cyan">级联失效</span>
+          </div>
+          <div class="metric-values">
+            <span class="val-after" id="m-ngram4">--</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill fill-cyan" id="bar-ngram4" style="width: 0%"></div>
+          </div>
+          <div class="metric-foot" id="m-ngram-detail">3-gram: -- | 5-gram: --</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">词汇改动率 & 语义保真度</span>
+            <span class="metric-tag tag-green" id="tag-guard">代码块保护开启</span>
+          </div>
+          <div class="metric-values">
+            <span class="val-after" id="m-edit-rate">--</span>
+            <span class="divider">/</span>
+            <span class="val-sem" id="m-sem-score">--</span>
+          </div>
+          <div class="metric-foot" id="m-unicode-foot">隐形 Unicode 清除: 0 | AI 套话清除: 0</div>
+        </div>
+      </div>
+
+      <!-- Main Studio Workspace -->
+      <div class="workspace-grid">
+        <!-- Left Column: Input & Controls -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>1. 待处理文本 & 对抗管道配置</h2>
+            <div class="btn-group">
+              <button class="btn-secondary btn-sm" id="btn-load-demo">载入中英混合示例</button>
+              <button class="btn-secondary btn-sm" id="btn-inject-zw">注入隐形零宽水印测试</button>
+              <button class="btn-secondary btn-sm" id="btn-clear">清空</button>
+            </div>
+          </div>
+
+          <textarea id="input-text" class="editor-textarea" placeholder="在此粘贴包含 textGrain / SynthID / Claude 统计水印或零宽隐写水印的文本...（支持 Markdown、代码块与数学公式自动锁定保护）"></textarea>
+
+          <div class="controls-section">
+            <div class="control-row">
+              <label for="preset-select">对抗预设方案 (Preset Mode)</label>
+              <select id="preset-select" class="select-input">
+                <option value="balanced" selected>Balanced — 均衡级联破坏 (推荐：改写~26%高熵点，检出率降至&lt;15%)</option>
+                <option value="stealth">Stealth — 轻度隐蔽扰动 (改写~14%高熵点，最大程度保留原句风貌)</option>
+                <option value="aggressive">Aggressive — 深度瓦解模式 (改写~42%高熵点 + 句法倒装，彻底抹除统计指纹)</option>
+                <option value="dipper">DIPPER — 受控双轴大模型重述 (接入本地 Ollama / OpenAI 兼容接口)</option>
+                <option value="backtranslate">Back-Translate — 跨语种多跳回译攻击 (破坏跨词表最优传输耦合)</option>
+              </select>
+            </div>
+
+            <div class="sliders-grid">
+              <div class="slider-box">
+                <div class="slider-top">
+                  <span>目标高熵词扰动率 (Target Edit Rate)</span>
+                  <strong id="lbl-edit-rate">26%</strong>
+                </div>
+                <input type="range" id="slider-edit-rate" min="5" max="60" step="1" value="26" />
+              </div>
+
+              <div class="slider-box">
+                <div class="slider-top">
+                  <span>目标水印上下文窗口 (Context Window h)</span>
+                  <strong id="lbl-window-size">4 tokens</strong>
+                </div>
+                <input type="range" id="slider-window-size" min="2" max="6" step="1" value="4" />
+              </div>
+            </div>
+
+            <div class="checkbox-row">
+              <label class="chk-label"><input type="checkbox" id="chk-sanitizer" checked /> 零宽/同形异义字清洗</label>
+              <label class="chk-label"><input type="checkbox" id="chk-syntax" checked /> 句式结构/主被动翻转</label>
+              <label class="chk-label"><input type="checkbox" id="chk-cliches" checked /> 擦除 AI 高频套话</label>
+              <label class="chk-label"><input type="checkbox" id="chk-guard" checked /> 锁定代码/公式/URL</label>
+            </div>
+
+            <!-- Collapsible Advanced DIPPER / LLM Config -->
+            <details class="advanced-box">
+              <summary>⚙️ 高级配置：DIPPER 双轴控制 & 本地 Ollama / OpenAI API 端点</summary>
+              <div class="advanced-inner">
+                <div class="checkbox-row">
+                  <label class="chk-label"><input type="checkbox" id="chk-dipper" /> 启用 Stage 3 DIPPER 大模型受控重写</label>
+                  <label class="chk-label"><input type="checkbox" id="chk-bt" /> 启用 Stage 4 跨语种多跳回译</label>
+                </div>
+                <div class="sliders-grid">
+                  <div class="slider-box">
+                    <div class="slider-top">
+                      <span>DIPPER 词汇多样性 (Lexical Diversity)</span>
+                      <strong id="lbl-lex-div">40</strong>
+                    </div>
+                    <input type="range" id="slider-lex-div" min="0" max="100" step="20" value="40" />
+                  </div>
+                  <div class="slider-box">
+                    <div class="slider-top">
+                      <span>DIPPER 句序多样性 (Order Diversity)</span>
+                      <strong id="lbl-order-div">40</strong>
+                    </div>
+                    <input type="range" id="slider-order-div" min="0" max="100" step="20" value="40" />
+                  </div>
+                </div>
+                <div class="api-inputs-grid">
+                  <div>
+                    <label>API Base URL (Ollama 或 OpenAI 兼容)</label>
+                    <input type="text" id="input-llm-url" value="http://localhost:11434/v1" class="text-input" />
+                  </div>
+                  <div>
+                    <label>模型名称 (Model)</label>
+                    <input type="text" id="input-llm-model" value="qwen2.5:7b" class="text-input" />
+                  </div>
+                  <div>
+                    <label>API Key (本地 Ollama 可留空)</label>
+                    <input type="password" id="input-llm-key" placeholder="sk-..." class="text-input" />
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <button class="btn-primary btn-block" id="btn-run-pipeline">
+              🚀 执行多级反水印对抗管道 (Run Anti-Watermark Pipeline)
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Output & Visual Forensics -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>2. 去水印输出与级联破坏可视化</h2>
+            <div class="btn-group">
+              <button class="btn-secondary btn-sm active" data-view="output">纯净结果</button>
+              <button class="btn-secondary btn-sm" data-view="heatmap">n-gram 哈希失效热力图</button>
+              <button class="btn-secondary btn-sm" data-view="diff">逐词 Diff 对比</button>
+              <button class="btn-secondary btn-sm" data-view="audit">扰动审计日志</button>
+              <button class="btn-accent btn-sm" id="btn-copy-output">📋 复制结果</button>
+            </div>
+          </div>
+
+          <div id="warnings-banner" class="warnings-banner hidden"></div>
+
+          <!-- View A: Clean Output -->
+          <div id="view-output" class="output-view active">
+            <textarea id="output-text" class="editor-textarea" readonly placeholder="点击左侧「执行多级反水印对抗管道」生成去除统计水印后的文本..."></textarea>
+          </div>
+
+          <!-- View B: Sliding Window Cascade Heatmap -->
+          <div id="view-heatmap" class="output-view">
+            <div class="heatmap-legend">
+              <span class="legend-item"><i class="dot dot-pivot"></i> 高熵枢轴词直接替换 (Direct Pivot Edit)</span>
+              <span class="legend-item"><i class="dot dot-cascade"></i> 后续滑动窗口哈希级联失效 (Context Hash Broken)</span>
+              <span class="legend-item"><i class="dot dot-intact"></i> 原词保留 (低熵/专业术语锁定)</span>
+            </div>
+            <div id="heatmap-container" class="visual-box"></div>
+          </div>
+
+          <!-- View C: Token Diff View -->
+          <div id="view-diff" class="output-view">
+            <div class="heatmap-legend">
+              <span class="legend-item"><i class="dot dot-del"></i> 原始带偏置词 (Removed)</span>
+              <span class="legend-item"><i class="dot dot-ins"></i> 对抗替换词 (Injected)</span>
+            </div>
+            <div id="diff-container" class="visual-box"></div>
+          </div>
+
+          <!-- View D: Audit Log -->
+          <div id="view-audit" class="output-view">
+            <div id="audit-container" class="visual-box"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: LIVE TEXTGRAIN ATTACK SANDBOX -->
+    <section id="tab-sandbox" class="tab-panel">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>🎯 MarkLLM / textGrain 实弹嵌入与对抗攻防靶场</h2>
+            <p class="subtitle">使用密钥将真实的 Gumbel 最优传输统计水印 + 零宽隐写注入文本，检验对抗前后检测器枢轴统计量 Z-Score 与 p-value 的崩塌过程</p>
+          </div>
+          <button class="btn-primary" id="btn-run-sandbox">🔥 注入真实 textGrain 水印并执行对抗击穿</button>
+        </div>
+
+        <div class="sandbox-controls">
+          <div>
+            <label>模拟检测器密钥 (Secret Key)</label>
+            <input type="text" id="sandbox-key" value="openai-textgrain-2026-default-key" class="text-input" />
+          </div>
+          <div>
+            <label>对抗预设强度</label>
+            <select id="sandbox-preset" class="select-input">
+              <option value="balanced" selected>Balanced (均衡模式)</option>
+              <option value="aggressive">Aggressive (深度模式)</option>
+              <option value="stealth">Stealth (轻度模式)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sandbox-comparison-grid">
+          <div class="sandbox-card card-danger">
+            <div class="sandbox-card-header">
+              <h3>攻击前：已嵌入 textGrain 水印文本</h3>
+              <span class="verdict-badge badge-red" id="sb-verdict-before">等待运行</span>
+            </div>
+            <div class="sb-stats-row">
+              <div><span>综合 Z-Score:</span> <strong id="sb-z-before">--</strong></div>
+              <div><span>Gumbel Z:</span> <strong id="sb-gz-before">--</strong></div>
+              <div><span>Green 占比:</span> <strong id="sb-green-before">--</strong></div>
+              <div><span>p-value:</span> <strong id="sb-p-before">--</strong></div>
+            </div>
+            <div class="sb-text-box" id="sb-text-before"></div>
+          </div>
+
+          <div class="sandbox-card card-success">
+            <div class="sandbox-card-header">
+              <h3>攻击后：经 anti-text-watermarks 处理</h3>
+              <span class="verdict-badge badge-green" id="sb-verdict-after">等待运行</span>
+            </div>
+            <div class="sb-stats-row">
+              <div><span>综合 Z-Score:</span> <strong id="sb-z-after">--</strong></div>
+              <div><span>Gumbel Z:</span> <strong id="sb-gz-after">--</strong></div>
+              <div><span>Green 占比:</span> <strong id="sb-green-after">--</strong></div>
+              <div><span>p-value:</span> <strong id="sb-p-after">--</strong></div>
+            </div>
+            <div class="sb-text-box" id="sb-text-after"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align:center; padding: 18px 24px 28px; color: #94a3b8; font-size: 12.5px; border-top: 1px solid #26334d;">
+    <strong>anti-text-watermarks v1.0.0</strong> · Created by <strong>01NGVI-QINGYI</strong> ·
+    Licensed under <a href="https://github.com/01NGVI-QINGYI/anti-text-watermarks/blob/main/LICENSE" target="_blank" style="color:#38bdf8;">AGPL-3.0-or-later</a> ·
+    <a href="https://github.com/01NGVI-QINGYI/anti-text-watermarks" target="_blank" style="color:#38bdf8;">Official Source Repository</a>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/logo.svg" width="110" alt="anti-text-watermarks logo">
+  <img src="assets/wen-shield-logo.svg" width="110" alt="anti-text-watermarks logo">
 </p>
 
 <h1 align="center">anti-text-watermarks</h1>

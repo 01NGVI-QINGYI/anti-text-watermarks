@@ -8,23 +8,19 @@
     <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#22d3ee"/><stop offset="52%" stop-color="#4f9cf8"/><stop offset="100%" stop-color="#b67af7"/>
     </linearGradient>
-    <linearGradient id="glyph" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#b8f7ff"/><stop offset="55%" stop-color="#5be2f0"/><stop offset="100%" stop-color="#a9a2ff"/>
-    </linearGradient>
   </defs>
   <rect width="512" height="512" rx="110" fill="url(#background)"/>
   <!-- Precisely symmetric shield, centered at x=256 -->
   <path d="M256 64 L405 124 V244 C405 338 341 402 256 446 C171 402 107 338 107 244 V124 Z"
         fill="#101c30" stroke="url(#shield)" stroke-width="14" stroke-linejoin="round"/>
-  <!-- Recognizable four-stroke 文: slanted dot, long horizontal, left and right sweeping strokes. -->
-  <g fill="none" stroke="url(#glyph)" stroke-linecap="round" stroke-linejoin="round">
-    <!-- 丨: short vertical top stroke -->
-    <path d="M256 150 V177" stroke-width="21"/>
-    <!-- 一: horizontal stroke -->
-    <path d="M171 215 Q256 210 341 215" stroke-width="20"/>
-    <!-- 丿: sweeping down-left, beginning beneath the horizontal -->
-    <path d="M306 244 Q283 299 251 329 Q221 357 185 371" stroke-width="22"/>
-    <!-- ㇏: sweeping down-right, crossing the left-falling stroke -->
-    <path d="M207 244 Q227 293 262 324 Q294 356 327 371" stroke-width="22"/>
+  <!-- 文: centered at x=256, with perfectly mirrored left/right geometry and solid fill. -->
+  <g fill="none" stroke="#eafaff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Clearly visible short vertical top stroke -->
+    <path d="M256 143 V184" stroke-width="22"/>
+    <!-- Centered horizontal stroke -->
+    <path d="M178 219 H334" stroke-width="21"/>
+    <!-- Mirrored descending sweeps, crossing at the exact center -->
+    <path d="M208 249 Q227 302 256 326 Q277 348 316 365" stroke-width="22"/>
+    <path d="M304 249 Q285 302 256 326 Q235 348 196 365" stroke-width="22"/>
   </g>
 </svg>

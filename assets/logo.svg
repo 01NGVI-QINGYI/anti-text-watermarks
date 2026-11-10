@@ -18,8 +18,8 @@
         fill="#101c30" stroke="url(#shield)" stroke-width="14" stroke-linejoin="round"/>
   <!-- Recognizable four-stroke 文: slanted dot, long horizontal, left and right sweeping strokes. -->
   <g fill="none" stroke="url(#glyph)" stroke-linecap="round" stroke-linejoin="round">
-    <!-- 丶: slanted top dot -->
-    <path d="M245 151 Q255 162 267 177" stroke-width="21"/>
+    <!-- 丨: short vertical top stroke -->
+    <path d="M256 150 V177" stroke-width="21"/>
     <!-- 一: horizontal stroke -->
     <path d="M171 215 Q256 210 341 215" stroke-width="20"/>
     <!-- 丿: sweeping down-left, beginning beneath the horizontal -->

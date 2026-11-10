@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">anti-text-watermarks — abstract Wen mark</title>
+  <desc id="desc">A geometric Chinese character Wen inside a cyan-violet cyber shield, with a subtly interrupted signal ring. No lettering.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1222"/><stop offset="100%" stop-color="#101b32"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/><stop offset="52%" stop-color="#4f9cf8"/><stop offset="100%" stop-color="#b67af7"/>
+    </linearGradient>
+    <linearGradient id="glyph" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b8f7ff"/><stop offset="55%" stop-color="#5be2f0"/><stop offset="100%" stop-color="#a9a2ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#background)"/>
+  <!-- Precisely symmetric shield, centered at x=256 -->
+  <path d="M256 64 L405 124 V244 C405 338 341 402 256 446 C171 402 107 338 107 244 V124 Z"
+        fill="#101c30" stroke="url(#shield)" stroke-width="14" stroke-linejoin="round"/>
+  <!-- Two symmetric signal arcs, interrupted to signify watermark disruption -->
+  <path d="M182 177 A100 100 0 0 1 330 177 M182 335 A100 100 0 0 0 330 335"
+        fill="none" stroke="#4d93c9" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+  <!-- Abstract 文: dot, horizontal bar, crossed sweeping strokes; all vector geometry -->
+  <path d="M256 150 L256 172" fill="none" stroke="url(#glyph)" stroke-width="17" stroke-linecap="round"/>
+  <path d="M178 208 H334" fill="none" stroke="url(#glyph)" stroke-width="17" stroke-linecap="round"/>
+  <path d="M208 239 C226 287 257 326 316 357"
+        fill="none" stroke="url(#glyph)" stroke-width="19" stroke-linecap="round"/>
+  <path d="M304 239 C286 287 255 326 196 357"
+        fill="none" stroke="url(#glyph)" stroke-width="19" stroke-linecap="round"/>
+  <!-- Small balanced terminal nodes: digital-text signal -->
+  <circle cx="196" cy="357" r="7" fill="#22d3ee"/>
+  <circle cx="316" cy="357" r="7" fill="#b67af7"/>
+</svg>

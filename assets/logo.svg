@@ -1,55 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">anti-text-watermarks logo</title>
-  <desc id="desc">A hexagonal cyber-forensics shield breaking a statistical wave into uncoupled nodes, symbolising adversarial de-watermarking.</desc>
+  <title id="title">anti-text-watermarks — abstract Wen mark</title>
+  <desc id="desc">A geometric Chinese character Wen inside a cyan-violet cyber shield, with a subtly interrupted signal ring. No lettering.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b1220"/>
-      <stop offset="1" stop-color="#111b2e"/>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1222"/><stop offset="100%" stop-color="#101b32"/>
     </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#38bdf8"/>
-      <stop offset="1" stop-color="#a78bfa"/>
+    <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/><stop offset="52%" stop-color="#4f9cf8"/><stop offset="100%" stop-color="#b67af7"/>
     </linearGradient>
-    <linearGradient id="core" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#22d3ee"/>
-      <stop offset="1" stop-color="#818cf8"/>
+    <linearGradient id="glyph" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b8f7ff"/><stop offset="55%" stop-color="#5be2f0"/><stop offset="100%" stop-color="#a9a2ff"/>
     </linearGradient>
-    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#f43f5e"/>
-      <stop offset="0.48" stop-color="#f59e0b"/>
-      <stop offset="1" stop-color="#34d399"/>
-    </linearGradient>
-    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="10" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-
-  <!-- Hexagonal shield outer & inner -->
-  <path d="M256 68 L404 126 V248 C404 332 338 394 256 430 C174 394 108 332 108 248 V126 Z"
-        fill="none" stroke="url(#edge)" stroke-width="14" stroke-linejoin="round" opacity="0.92"/>
-  <path d="M256 92 L380 140 V248 C380 318 326 372 256 404 C186 372 132 318 132 248 V140 Z"
-        fill="#0e1626" opacity="0.76"/>
-
-  <!-- Statistical wave transitioning from coupled (left) to uncoupled cascade (right) -->
-  <path d="M154 254 C178 206, 202 302, 226 254 C244 218, 256 254, 256 254"
-        fill="none" stroke="url(#pulse)" stroke-width="8" stroke-linecap="round"/>
-  <path d="M268 254 L302 206 M268 254 L348 254 M268 254 L308 308"
-        fill="none" stroke="url(#core)" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 8" opacity="0.9"/>
-
-  <!-- Sliding window cascade nodes -->
-  <g filter="url(#glow)">
-    <circle cx="176" cy="236" r="14" fill="#f43f5e"/>
-    <circle cx="256" cy="254" r="24" fill="url(#core)"/>
-    <circle cx="304" cy="204" r="16" fill="#38bdf8"/>
-    <circle cx="348" cy="254" r="16" fill="#34d399"/>
-    <circle cx="308" cy="308" r="16" fill="#a78bfa"/>
-  </g>
-
-  <!-- Label -->
-  <text x="256" y="472" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif"
-        font-size="56" font-weight="700" letter-spacing="12" fill="#e2e8f0">ATW</text>
+  <rect width="512" height="512" rx="110" fill="url(#background)"/>
+  <!-- Precisely symmetric shield, centered at x=256 -->
+  <path d="M256 64 L405 124 V244 C405 338 341 402 256 446 C171 402 107 338 107 244 V124 Z"
+        fill="#101c30" stroke="url(#shield)" stroke-width="14" stroke-linejoin="round"/>
+  <!-- Two symmetric signal arcs, interrupted to signify watermark disruption -->
+  <path d="M182 177 A100 100 0 0 1 330 177 M182 335 A100 100 0 0 0 330 335"
+        fill="none" stroke="#4d93c9" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+  <!-- Abstract 文: dot, horizontal bar, crossed sweeping strokes; all vector geometry -->
+  <path d="M256 150 L256 172" fill="none" stroke="url(#glyph)" stroke-width="17" stroke-linecap="round"/>
+  <path d="M178 208 H334" fill="none" stroke="url(#glyph)" stroke-width="17" stroke-linecap="round"/>
+  <path d="M208 239 C226 287 257 326 316 357"
+        fill="none" stroke="url(#glyph)" stroke-width="19" stroke-linecap="round"/>
+  <path d="M304 239 C286 287 255 326 196 357"
+        fill="none" stroke="url(#glyph)" stroke-width="19" stroke-linecap="round"/>
+  <!-- Small balanced terminal nodes: digital-text signal -->
+  <circle cx="196" cy="357" r="7" fill="#22d3ee"/>
+  <circle cx="316" cy="357" r="7" fill="#b67af7"/>
 </svg>
